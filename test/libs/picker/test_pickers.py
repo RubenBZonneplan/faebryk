@@ -390,6 +390,29 @@ class TestPickerBase(unittest.TestCase, ABC):
             add_pickers_func=self.add_pickers,
         )
 
+    def test_find_header(self):
+        self.TestRequirements(
+            self,
+            requirement=F.Header(horizonal_pin_count=3, vertical_pin_count=1).builder(
+                lambda h: (
+                    h.pad_type.merge(F.Constant(F.Header.PadType.THROUGH_HOLE)),
+                    h.pin_type.merge(F.Constant(F.Header.PinType.MALE)),
+                    h.angle.merge(F.Constant(F.Header.Angle.STRAIGHT)),
+                    h.mating_pin_lenght.merge(F.Range.from_center_rel(6 * P.mm, 0.1)),
+                    h.pin_pitch.merge(F.Constant(2.54 * P.mm)),
+                )
+            ),
+            footprint=[
+                ("HDR-TH_3P-P2.54-V-M", 3),
+                ("Plugin,P=2.54mm", 3),
+            ],
+            add_pickers_func=self.add_pickers,
+        )
+
+    def tearDown(self):
+        # in test atexit not triggered, thus need to close DB manually
+        JLCPCB_DB.get().close()
+
 
 class TestPickerPerformanceBase(unittest.TestCase, ABC):
     @abstractmethod
