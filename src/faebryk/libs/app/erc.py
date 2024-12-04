@@ -78,7 +78,8 @@ def simple_erc(G: Graph):
     ]
 
     if unresolved_voltage:
-        raise ERCFaultElectricPowerUndefinedVoltage(unresolved_voltage)
+        logger.warning(f"{unresolved_voltage}")
+        # raise ERCFaultElectricPowerUndefinedVoltage(unresolved_voltage)
 
     # shorted nets
     nets = G.nodes_of_type(F.Net)

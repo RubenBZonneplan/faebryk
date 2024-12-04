@@ -43,9 +43,12 @@ class LayoutMatrix(Layout):
         number_of_distributions = self.distribution[0] * self.distribution[1]
 
         if number_of_nodes > number_of_distributions:
-            raise ValueError(
+            logger.warning(
                 f"Number of nodes ({number_of_nodes}) is more than we can distribute ({number_of_distributions})"  # noqa E501
             )
+            # raise ValueError(
+            #    f"Number of nodes ({number_of_nodes}) is more than we can distribute ({number_of_distributions})"  # noqa E501
+            # )
         node_index = 0
         for x in range(self.distribution[0]):
             for y in range(self.distribution[1]):

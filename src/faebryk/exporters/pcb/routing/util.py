@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 # TODO remove
-DEFAULT_TRACE_WIDTH = 0.1
+DEFAULT_TRACE_WIDTH = 0.25
 DEFAULT_VIA_SIZE_DRILL = (0.45, 0.25)
 
 

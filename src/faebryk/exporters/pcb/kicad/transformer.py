@@ -764,6 +764,9 @@ class PCB_Transformer:
     ):
         # check if exists
         zones = self.pcb.zones
+        # if zones:
+        #    logger.warning(f"Zones already exist, skipping. zones:{zones}")
+        #    return
         # TODO: zones is always emtpy list?
         # TODO check bbox
 
@@ -900,7 +903,9 @@ class PCB_Transformer:
 
     def move_fp(self, fp: Footprint, coord: C_xyr, layer: str):
         if any([x.text == "FBRK:notouch" for x in fp.fp_texts]):
-            logger.warning(f"Skipped no touch component: {fp.name}")
+            logger.warning(
+                f"Skipped no touch component: {fp.propertys['Reference'].value} at [x:{fp.at.x}, y:{fp.at.y}, r:{fp.at.r}]"  # noqa E501
+            )
             return
 
         # Rotate

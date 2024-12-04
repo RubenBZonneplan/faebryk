@@ -99,3 +99,6 @@ _local
 
 # OS stuff
 .DS_Store
+
+# git
+.gitconfig
